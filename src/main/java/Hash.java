@@ -186,7 +186,7 @@ public class Hash {
                     fmt.format("%15s %15s %15s\n", "***", "***", "***");
                 }
             }
-
+            fmt.format("%47s\n", "-----------------------------------------------");
         }
         System.out.println(fmt);
     }
