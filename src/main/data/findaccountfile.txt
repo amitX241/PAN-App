@@ -5,3 +5,5 @@ AACLD0007B,Logan,Los Angeles
 AACGD0007B,Charlotte,Hong Kong
 AAAFS7241A,Aria,Dubai
 AVAAC7241A,Ethan,Rome
+AWACC7251A,Mason,Paris
+AVAGC7101A,Liaman,Sydney

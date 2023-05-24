@@ -25,7 +25,7 @@ public class PanMain {
 
                     hash.initializeHash();
                     hash.addEntry(ac.accounts);
-
+//                    hash.printAccount(ac.accounts);
                     System.out.println("Data Added to Hash!");
                     System.out.println("");
                     break;
