@@ -1,5 +1,12 @@
 ## Running the code
-Amit please fill it
+Do a git clone of the repository and switch branch to "optimization".
+git clone https://github.com/amitX241/PAN-App.git
+git branch optimization
+
+Then Run the PANMain.java to start the application.
+
+## Application Overview
+
 
 ## Input
 - For input to the code here we have used an input text file named accountfile.txt which consist of pan numbers, name, address in a comma separated manner.
