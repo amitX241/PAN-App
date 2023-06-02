@@ -1,7 +1,7 @@
 ## Running the code
 Do a git clone of the repository and switch branch to "optimization".
 - git clone https://github.com/amitX241/PAN-App.git
-- git branch optimization
+- git checkout optimization
 
 Then Run the PANMain.java to start the application.
 
