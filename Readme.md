@@ -5,6 +5,7 @@ Do a git clone of the repository and switch branch to "optimization".
 - git checkout optimization
 
 Then Run the PANMain.java to start the application.
+Preferred IDE: Eclipse
 
 ## Menu Driven Code Instructions
 After running the code you will have 4 options
