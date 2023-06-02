@@ -22,7 +22,7 @@ public class Account{
     }
     
     boolean checkInput(ArrayList<String> accountDetails) {
-    	if(accountDetails.size() > 3) {
+    	if(accountDetails.size() != 3) {
     		return false;
     	}
     	if(accountDetails.get(0).length() != 10 || 
@@ -30,6 +30,16 @@ public class Account{
     	   accountDetails.get(2).length() > 50 ) {
     		return false;
     	}
+    	for (char c : accountDetails.get(0).toCharArray()) {
+    		if (!Character.isLetterOrDigit(c)) {
+    			return false;
+    		}
+    	}
+    	if(accountDetails.get(1).length() == 0 ||
+    	   accountDetails.get(2).length() == 0 ) {
+    	    System.out.println("Warning: Please donot leave Name or Place blank");
+    	}
+      
     	return true;
     }
 
@@ -41,10 +51,10 @@ public class Account{
             while(myReader.hasNextLine()){
                 ArrayList<String> accountDetail = new ArrayList<String>();
                 String data = myReader.nextLine();
-                //for handleing blank cases
-//                if(data.length() == 0) {
-//                	continue;
-//                }
+//                for handleing blank cases
+                if(data.length() == 0) {
+                	continue;
+                }
                 String part = "";
                 for(int i=0 ; i<data.length() ; i++){
                     if(data.charAt(i) == ','){
@@ -80,14 +90,20 @@ public class Account{
             Scanner myReader = new Scanner(myObj);
             while(myReader.hasNextLine()){
                 String data = myReader.nextLine();
-                //for handleing blank cases
-//                if(data.length() == 0) {
-//                	continue;
-//                }
+//              for handleing blank cases
+                if(data.length() == 0) {
+                	continue;
+                }
                 if(data.length() != 10) {
                 	System.err.println("The Search file consist of invalid entries please verify the file " + data);
                 	System.exit(0);
                 }
+                for (char c : data.toCharArray()) {
+            		if (!Character.isLetterOrDigit(c)) {
+            			System.err.println("The Search file consist of invalid entries please verify the file " + data);
+                    	System.exit(0);
+            		}
+            	}
                 pans.add(data);                
             }
             myReader.close();

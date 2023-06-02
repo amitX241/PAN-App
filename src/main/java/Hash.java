@@ -123,6 +123,11 @@ public class Hash {
 					FL_HashTable[h1].SL_HashTable[index] = account;
 					break;
 				} else if ((FL_HashTable[h1].SL_HashTable[index].Pan).equals(account.Pan)) {
+					if(!FL_HashTable[h1].SL_HashTable[index].Name.equals(account.Name)||
+					   !FL_HashTable[h1].SL_HashTable[index].Place.equals(account.Place)) {
+						System.err.println("Invalid Input file, file consist of duplicate pan numbers but under different Name or Place");
+	                	System.exit(0);
+					}
 					System.out.println("Pan number and its details are already Present "
 							+ FL_HashTable[h1].SL_HashTable[index].Pan);
 					return;

@@ -25,6 +25,10 @@ public class PanMain {
                     ac.accounts = ac.initializeAccount("src/main/data/input.txt");
 
                     hash.initializeHash();
+                    if(ac.accounts.size() == 0) {
+                    	System.err.println("Input File is empty");
+                    	System.exit(0);
+                    }
                     hash.addEntry(ac.accounts);
 //                    hash.printAccount(ac.accounts);
                     System.out.println("Data Added to Hash!");
@@ -34,6 +38,10 @@ public class PanMain {
                 case 2:
                     System.out.println("Searching for Information...");
                     ac.find_pans = ac.initializeSearch("src/main/data/search.txt");
+                    if(ac.find_pans.size() == 0) {
+                    	System.err.println("Search File is empty");
+                    	System.exit(0);
+                    }
                     hash.searchDetails(ac.find_pans);
                     System.out.println("Search Finished!");
                     System.out.println("");
