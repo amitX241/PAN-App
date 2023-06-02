@@ -105,11 +105,19 @@ public class Account{
                 	System.err.println("The Search file consist of invalid entries please verify the file " + data);
                 	System.exit(0);
                 }
+                int pos = 0;
                 for (char c : data.toCharArray()) {
             		if (!Character.isLetterOrDigit(c)) {
             			System.err.println("The Search file consist of invalid entries please verify the file " + data);
                     	System.exit(0);
             		}
+            		if((pos <5  && !Character.isLetter(c)) ||
+            		   (pos >=5 && pos <9 && !Character.isDigit(c)) ||
+            	   	   (pos == 9 && !Character.isLetter(c))) {
+	            			System.err.println("The Search file consist of invalid entries please verify the file " + data);
+	                    	System.exit(0);
+	            	    }
+            	    	pos++;
             	}
                 pans.add(data);                
             }
