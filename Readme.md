@@ -4,6 +4,8 @@ Do a git clone of the repository and switch branch to "optimization".
 - git clone https://github.com/amitX241/PAN-App.git
 - git checkout optimization
 
+Then Run the PANMain.java to start the application.
+
 ## Menu Driven Code Instructions
 After running the code you will have 4 options
 - Take Input
@@ -14,7 +16,7 @@ The options are self explainatory.
 After running the application, first choose option 1 to Take Input,
 Then choose option 2 or option 3 to Search or Display All results.
 
-Then Run the PANMain.java to start the application.
+
 
 ## Application Overview
 
