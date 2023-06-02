@@ -5,11 +5,11 @@ import java.util.Optional;
 class FirstHash {
 	int size;
 	int occupied;
-	Account[] hashTable;
+	Account[] SL_HashTable;
 
 	public FirstHash() {
 		size = 13;
-		hashTable = new Account[size];
+		SL_HashTable = new Account[size];
 		occupied = 0;
 	}
 }
@@ -17,35 +17,35 @@ class FirstHash {
 public class Hash {
 	static int ftable_size;
 	final double DEFAULT_LOAD_FACTOR;
-	FirstHash firstHash[];
+	FirstHash FL_HashTable[];
 	char fourthChar[] = { 'C', 'P', 'H', 'F', 'A', 'T', 'B', 'L', 'J', 'G' };
 
 	Hash() {
 		ftable_size = 10;
 		DEFAULT_LOAD_FACTOR = 0.75;
-		firstHash = new FirstHash[ftable_size];
+		FL_HashTable = new FirstHash[ftable_size];
 		for (int i = 0; i < ftable_size; i++) {
-			firstHash[i] = new FirstHash();
+			FL_HashTable[i] = new FirstHash();
 		}
 	}
 
 	void initializeHash(int h1) {
 
-		firstHash[h1].occupied = 0;
+		FL_HashTable[h1].occupied = 0;
 
-		for (int j = 0; j < firstHash[h1].size; j++) {
-			firstHash[h1].hashTable[j] = null;
+		for (int j = 0; j < FL_HashTable[h1].size; j++) {
+			FL_HashTable[h1].SL_HashTable[j] = null;
 		}
 	}
 
 	void initializeHash() {
 
 		for (int i = 0; i < ftable_size; i++) {
-			firstHash[i].occupied = 0;
+			FL_HashTable[i].occupied = 0;
 		}
 		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < firstHash[i].size; j++) {
-				firstHash[i].hashTable[j] = null;
+			for (int j = 0; j < FL_HashTable[i].size; j++) {
+				FL_HashTable[i].SL_HashTable[j] = null;
 			}
 		}
 	}
@@ -83,6 +83,9 @@ public class Hash {
 		case 'G':
 			val = 9;
 			break;
+		default:
+			System.err.println("Invalid Pan number");
+			System.exit(0);
 		}
 		return val;
 	}
@@ -92,7 +95,7 @@ public class Hash {
 		for (int i = 0; i < pan.length(); i++) {
 			h2 = h2 + (int) pan.charAt(i);
 		}
-		return h2 % firstHash[h1].size;
+		return h2 % FL_HashTable[h1].size;
 	}
 
 	void insert(Account account) {
@@ -103,7 +106,7 @@ public class Hash {
 		h1 = hash1(account.Pan.charAt(3));
 		h2 = hash2(h1, account.Pan);
 
-		double loadFactor = (1.0 * firstHash[h1].occupied) / firstHash[h1].size;
+		double loadFactor = (1.0 * FL_HashTable[h1].occupied) / FL_HashTable[h1].size;
 		if (loadFactor > DEFAULT_LOAD_FACTOR) {
 			System.out.println();
 			System.out.println(loadFactor + " is greater than " + DEFAULT_LOAD_FACTOR);
@@ -111,22 +114,22 @@ public class Hash {
 			extend_rehash(h1);
 		}
 
-		if (firstHash[h1].hashTable[h2] == null) {
-			firstHash[h1].hashTable[h2] = account;
+		if (FL_HashTable[h1].SL_HashTable[h2] == null) {
+			FL_HashTable[h1].SL_HashTable[h2] = account;
 		} else {
-			for (int j = 0; j < firstHash[h1].size; j++) {
-				int index = (h2 + j * j) % firstHash[h1].size;
-				if (firstHash[h1].hashTable[index] == null) {
-					firstHash[h1].hashTable[index] = account;
+			for (int j = 0; j < FL_HashTable[h1].size; j++) {
+				int index = (h2 + j * j) % FL_HashTable[h1].size;
+				if (FL_HashTable[h1].SL_HashTable[index] == null) {
+					FL_HashTable[h1].SL_HashTable[index] = account;
 					break;
-				} else if ((firstHash[h1].hashTable[index].Pan).equals(account.Pan)) {
-					System.out.println(
-							"Pan number and its details are already Present " + firstHash[h1].hashTable[index].Pan);
+				} else if ((FL_HashTable[h1].SL_HashTable[index].Pan).equals(account.Pan)) {
+					System.out.println("Pan number and its details are already Present "
+							+ FL_HashTable[h1].SL_HashTable[index].Pan);
 					return;
 				}
 			}
 		}
-		firstHash[h1].occupied++;
+		FL_HashTable[h1].occupied++;
 	}
 
 	void addEntry(ArrayList<Account> accounts) {
@@ -137,19 +140,19 @@ public class Hash {
 	}
 
 	void extend_rehash(int i) {
-		int old_table_size = firstHash[i].size;
-		firstHash[i].size = firstHash[i].size * 2;
+		int old_table_size = FL_HashTable[i].size;
+		FL_HashTable[i].size = FL_HashTable[i].size * 2;
 		Account hashtable_temp[] = new Account[old_table_size];
 
 		for (int j = 0; j < old_table_size; j++) {
-			hashtable_temp[j] = firstHash[i].hashTable[j];
+			hashtable_temp[j] = FL_HashTable[i].SL_HashTable[j];
 		}
 
-		firstHash[i].hashTable = new Account[firstHash[i].size];
+		FL_HashTable[i].SL_HashTable = new Account[FL_HashTable[i].size];
 
 		initializeHash(i);
 
-		System.out.println("Size is changed from " + old_table_size + " to " + firstHash[i].size + ".\n");
+		System.out.println("Size is changed from " + old_table_size + " to " + FL_HashTable[i].size + ".\n");
 
 		for (int j = 0; j < old_table_size; j++) {
 			insert(hashtable_temp[j]);
@@ -157,40 +160,48 @@ public class Hash {
 
 	}
 
-	void searchDetails(ArrayList<Account> find_accounts) {
+	void searchDetails(ArrayList<String> find_pans) {
 
-		Formatter fmt = new Formatter();
-		fmt.format("%15s %15s %15s %15s\n", "PAN", "Name", "Address", "Status");
-		fmt.format("%15s %15s %15s %15s\n", "---------------", "---------------", "---------------", "---------------");
-		for (Account find_account : find_accounts) {
+//		Formatter fmt = new Formatter();
+//		fmt.format("%15s %15s %15s %15s\n", "PAN", "Name", "Address", "Status");
+//		fmt.format("%15s %15s %15s %15s\n", "---------------", "---------------", "---------------", "---------------");
+		String fmt = "";
+		for (String pan : find_pans) {
 			boolean found = false;
-			int h1 = hash1(find_account.Pan.charAt(3));
-			int h2 = hash2(h1, find_account.Pan);
-			if ((firstHash[h1].hashTable[h2] != null) && (firstHash[h1].hashTable[h2].Pan.equals(find_account.Pan))) {
-				fmt = printAccountDetails(find_account, "Found", fmt);
+			int h1 = hash1(pan.charAt(3));
+			int h2 = hash2(h1, pan);
+			if ((FL_HashTable[h1].SL_HashTable[h2] != null)
+					&& (FL_HashTable[h1].SL_HashTable[h2].Pan.equals(pan))) {
+				printPanFound(FL_HashTable[h1].SL_HashTable[h2], "");
 				found = true;
 			} else {
-				for (int j = 0; j < firstHash[h1].size; j++) {
-					int index = (h2 + j * j) % firstHash[h1].size;
-					if ((firstHash[h1].hashTable[index] != null)
-							&& (firstHash[h1].hashTable[index].Pan.equals(find_account.Pan))) {
-						fmt = printAccountDetails(find_account, "Found", fmt);
+				for (int j = 0; j < FL_HashTable[h1].size; j++) {
+					int index = (h2 + j * j) % FL_HashTable[h1].size;
+					if ((FL_HashTable[h1].SL_HashTable[index] != null)
+							&& (FL_HashTable[h1].SL_HashTable[index].Pan.equals(pan))) {
+						printPanFound(FL_HashTable[h1].SL_HashTable[index], "");
 						found = true;
 						break;
 					}
 				}
 			}
 			if (found == false) {
-				fmt = printAccountDetails(find_account, "Not Found", fmt);
+				
+				printPanFound(new Account(pan, "", ""), "n't");
 			}
 		}
-		System.out.println(fmt);
 
 	}
 
-	Formatter printAccountDetails(Account account, String status, Formatter fmt) {
-		fmt.format("%15s %15s %15s %15s\n", account.Pan, account.Name, account.Place, status);
-		return fmt;
+	void printPanFound(Account account, String status) {
+		String stm = "";
+		if (status == "") {
+			stm = "The entry " + account.Pan + " does" + status + " exists - " + account.Name + " " + account.Place
+					+ "\n";
+		} else {
+			stm = "The entry " + account.Pan + " does" + status + " exists\n";
+		}
+		System.out.println(stm);
 	}
 
 	void hashtablePrint() {
@@ -201,10 +212,10 @@ public class Hash {
 		fmt.format("%15s %15s %15s\n", "PAN", "Name", "Address");
 		fmt.format("%15s %15s %15s\n", "---------------", "---------------", "---------------");
 		for (int k = 0; k < ftable_size; k++) {
-			for (int l = 0; l < firstHash[k].size; l++) {
-				if (firstHash[k].hashTable[l] != null) {
-					fmt.format(elementNo++ + "%15s %15s %15s\n", firstHash[k].hashTable[l].Pan,
-							firstHash[k].hashTable[l].Name, firstHash[k].hashTable[l].Place);
+			for (int l = 0; l < FL_HashTable[k].size; l++) {
+				if (FL_HashTable[k].SL_HashTable[l] != null) {
+					fmt.format(elementNo++ + "%15s %15s %15s\n", FL_HashTable[k].SL_HashTable[l].Pan,
+							FL_HashTable[k].SL_HashTable[l].Name, FL_HashTable[k].SL_HashTable[l].Place);
 				} else {
 					fmt.format("%15s %15s %15s\n", "***", "***", "***");
 				}

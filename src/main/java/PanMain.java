@@ -1,4 +1,5 @@
 import java.lang.module.FindException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PanMain {
@@ -21,7 +22,7 @@ public class PanMain {
             switch (choice) {
                 case 1:
                     System.out.println("Taking Input...");
-                    ac.accounts = ac.initializeAccount("src/main/data/accountfile.txt");
+                    ac.accounts = ac.initializeAccount("src/main/data/input.txt");
 
                     hash.initializeHash();
                     hash.addEntry(ac.accounts);
@@ -32,8 +33,8 @@ public class PanMain {
 
                 case 2:
                     System.out.println("Searching for Information...");
-                    ac.find_accounts = ac.initializeAccount("src/main/data/findaccountfile.txt");
-                    hash.searchDetails(ac.find_accounts);
+                    ac.find_pans = ac.initializeSearch("src/main/data/search.txt");
+                    hash.searchDetails(ac.find_pans);
                     System.out.println("Search Finished!");
                     System.out.println("");
                     break;
