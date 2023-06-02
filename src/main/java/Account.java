@@ -30,10 +30,17 @@ public class Account{
     	   accountDetails.get(2).length() > 50 ) {
     		return false;
     	}
+    	int pos = 0;
     	for (char c : accountDetails.get(0).toCharArray()) {
     		if (!Character.isLetterOrDigit(c)) {
     			return false;
     		}
+    		if((pos <5  && !Character.isLetter(c)) ||
+    		   (pos >=5 && pos <9 && !Character.isDigit(c)) ||
+    		   (pos == 9 && !Character.isLetter(c))) {
+    			return false;
+    		}
+    		pos++;
     	}
     	if(accountDetails.get(1).length() == 0 ||
     	   accountDetails.get(2).length() == 0 ) {
