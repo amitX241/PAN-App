@@ -2,30 +2,19 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Optional;
 
-class FirstHash {
-	int size;
-	int occupied;
-	Account[] SL_HashTable;
-
-	public FirstHash() {
-		size = 13;
-		SL_HashTable = new Account[size];
-		occupied = 0;
-	}
-}
 
 public class Hash {
 	static int ftable_size;
 	final double DEFAULT_LOAD_FACTOR;
-	FirstHash FL_HashTable[];
+	FirstLevelHash FL_HashTable[];
 	char fourthChar[] = { 'C', 'P', 'H', 'F', 'A', 'T', 'B', 'L', 'J', 'G' };
 
 	Hash() {
 		ftable_size = 10;
 		DEFAULT_LOAD_FACTOR = 0.75;
-		FL_HashTable = new FirstHash[ftable_size];
+		FL_HashTable = new FirstLevelHash[ftable_size];
 		for (int i = 0; i < ftable_size; i++) {
-			FL_HashTable[i] = new FirstHash();
+			FL_HashTable[i] = new FirstLevelHash();
 		}
 	}
 
@@ -166,10 +155,6 @@ public class Hash {
 	}
 
 	void searchDetails(ArrayList<String> find_pans) {
-
-//		Formatter fmt = new Formatter();
-//		fmt.format("%15s %15s %15s %15s\n", "PAN", "Name", "Address", "Status");
-//		fmt.format("%15s %15s %15s %15s\n", "---------------", "---------------", "---------------", "---------------");
 		String fmt = "";
 		for (String pan : find_pans) {
 			boolean found = false;

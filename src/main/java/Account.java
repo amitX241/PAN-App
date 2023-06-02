@@ -23,28 +23,32 @@ public class Account{
     
     boolean checkInput(ArrayList<String> accountDetails) {
     	if(accountDetails.size() != 3) {
+    		System.err.println("The Input file consist of invalid entries please verify the file");
     		return false;
     	}
     	if(accountDetails.get(0).length() != 10 || 
     	   accountDetails.get(1).length() > 30 ||
     	   accountDetails.get(2).length() > 50 ) {
+    		System.err.println("The Input file consist of invalid entries please verify the file " + accountDetails.get(0));
     		return false;
     	}
     	int pos = 0;
     	for (char c : accountDetails.get(0).toCharArray()) {
     		if (!Character.isLetterOrDigit(c)) {
+    			System.err.println("The Input file consist of invalid entries please verify the file " + accountDetails.get(0));
     			return false;
     		}
-    		if((pos <5  && !Character.isLetter(c)) ||
-    		   (pos >=5 && pos <9 && !Character.isDigit(c)) ||
-    		   (pos == 9 && !Character.isLetter(c))) {
+    		if(((pos <5 || pos == 9) && !Character.isLetter(c)) ||
+    		   ((pos <5 || pos == 9)  && Character.isLetter(c) && !Character.isUpperCase(c)) ||
+    		   (pos >=5 && pos <9 && !Character.isDigit(c))) {
+    			System.err.println("The Input file consist of invalid entries please verify the file " + accountDetails.get(0));
     			return false;
     		}
     		pos++;
     	}
     	if(accountDetails.get(1).length() == 0 ||
     	   accountDetails.get(2).length() == 0 ) {
-    	    System.out.println("Warning: Please donot leave Name or Place blank");
+    	    System.out.println("Warning: Please do not leave Name or Place blank");
     	}
       
     	return true;
@@ -77,7 +81,6 @@ public class Account{
                 	accounts.add(account);
                 }
                 else {
-                	System.err.println("The Input file consist of invalid entries please verify the file");
                 	System.exit(0);
                 }
                 
@@ -111,9 +114,9 @@ public class Account{
             			System.err.println("The Search file consist of invalid entries please verify the file " + data);
                     	System.exit(0);
             		}
-            		if((pos <5  && !Character.isLetter(c)) ||
-            		   (pos >=5 && pos <9 && !Character.isDigit(c)) ||
-            	   	   (pos == 9 && !Character.isLetter(c))) {
+            		if(((pos <5 || pos == 9) && !Character.isLetter(c)) ||
+            		   ((pos <5 || pos == 9) && Character.isLetter(c) && !Character.isUpperCase(c)) ||
+            		    (pos >=5 && pos <9 && !Character.isDigit(c))) {
 	            			System.err.println("The Search file consist of invalid entries please verify the file " + data);
 	                    	System.exit(0);
 	            	    }
