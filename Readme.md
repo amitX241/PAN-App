@@ -32,3 +32,4 @@ Then choose option 2 or option 3 to Search or Display All results.
 - Other outputs like menu, found or not, hashing results are shown in the console itself.
 
 ## TimeComplexity 
+- Time Complexity Analysis can be found on "complexity analysis.pdf" file.
