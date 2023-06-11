@@ -160,11 +160,14 @@ public class Hash {
 			boolean found = false;
 			int h1 = hash1(pan.charAt(3));
 			int h2 = hash2(h1, pan);
-			if ((FL_HashTable[h1].SL_HashTable[h2] != null)
-					&& (FL_HashTable[h1].SL_HashTable[h2].Pan.equals(pan))) {
+			if (FL_HashTable[h1].SL_HashTable[h2] == null){
+				found = false;
+			}
+			else if (FL_HashTable[h1].SL_HashTable[h2].Pan.equals(pan)) {
 				printPanFound(FL_HashTable[h1].SL_HashTable[h2], "");
 				found = true;
-			} else {
+			} 
+			else {
 				for (int j = 0; j < FL_HashTable[h1].size; j++) {
 					int index = (h2 + j * j) % FL_HashTable[h1].size;
 					if ((FL_HashTable[h1].SL_HashTable[index] != null)
@@ -176,7 +179,6 @@ public class Hash {
 				}
 			}
 			if (found == false) {
-				
 				printPanFound(new Account(pan, "", ""), "n't");
 			}
 		}
